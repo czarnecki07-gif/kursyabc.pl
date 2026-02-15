@@ -1261,3 +1261,89 @@ mark {
   <div class="course-meta">Obowiązki, przepisy, odpowiedzialność.</div>
   <div class="course-tag">Nauczyciele</div>
 </a>
+<script>
+// ————————————————————————————————
+// ZAKŁADKI
+// ————————————————————————————————
+const tabs = document.querySelectorAll(".tab");
+const sections = document.querySelectorAll(".courses-grid");
+
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    tabs.forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+
+    const target = tab.dataset.target;
+    sections.forEach(sec => sec.classList.remove("active"));
+    document.getElementById(target).classList.add("active");
+  });
+});
+
+// ————————————————————————————————
+// WYSZUKIWARKA GLOBALNA
+// ————————————————————————————————
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase();
+
+  document.querySelectorAll(".course-card").forEach(card => {
+    const title = card.dataset.title.toLowerCase();
+    const tag = card.dataset.tag.toLowerCase();
+
+    const match = title.includes(query) || tag.includes(query);
+
+    card.style.display = match ? "flex" : "none";
+
+    // highlight
+    const titleDiv = card.querySelector(".course-title");
+    titleDiv.innerHTML = titleDiv.textContent.replace(
+      new RegExp(query, "gi"),
+      match ? "<mark>$&</mark>" : titleDiv.textContent
+    );
+  });
+});
+
+// ————————————————————————————————
+// SORTOWANIE
+// ————————————————————————————————
+const sortSelect = document.getElementById("sortSelect");
+
+sortSelect.addEventListener("change", () => {
+  const activeTab = document.querySelector(".courses-grid.active");
+  const cards = Array.from(activeTab.querySelectorAll(".course-card"));
+  const mode = sortSelect.value;
+
+  let sorted = cards;
+
+  if (mode === "az") {
+    sorted = cards.sort((a, b) =>
+      a.dataset.title.localeCompare(b.dataset.title)
+    );
+  }
+
+  if (mode === "za") {
+    sorted = cards.sort((a, b) =>
+      b.dataset.title.localeCompare(a.dataset.title)
+    );
+  }
+
+  if (mode === "poziom") {
+    const order = { A: 1, B: 2, C: 3, T: 4 };
+    sorted = cards.sort((a, b) =>
+      order[a.dataset.level] - order[b.dataset.level]
+    );
+  }
+
+  if (mode === "temat") {
+    sorted = cards.sort((a, b) =>
+      a.dataset.tag.localeCompare(b.dataset.tag)
+    );
+  }
+
+  sorted.forEach(card => activeTab.appendChild(card));
+});
+</script>
+</div> <!-- .page -->
+</body>
+</html>
