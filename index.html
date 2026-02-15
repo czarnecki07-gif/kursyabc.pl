@@ -7,15 +7,18 @@
 
 <style>
 /* ————————————————————————————————
-   GLOBALNE STYLE
+   APPLE / iOS PASTEL STYLE
 ———————————————————————————————— */
 :root {
   --bg: #f5f5f7;
   --card-bg: #ffffff;
-  --text-main: #3a3a3c;
+  --pill-bg: #e5e5ea;
+  --pill-active-bg: #ffffff;
+  --pill-active-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  --text-main: #1c1c1e;
   --text-muted: #6e6e73;
   --accent: #2ecc71;
-  --radius: 12px;
+  --radius: 14px;
   --shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
@@ -40,7 +43,7 @@ body {
   font-weight: 800;
   text-align: center;
   margin-bottom: 10px;
-  color: var(--text-main);
+  color: #3a3a3c; /* ciemnoszary zamiast czarnego */
 }
 .logo .a { color: #2ecc71; }
 .logo .b { color: #3498db; }
@@ -53,7 +56,7 @@ body {
 }
 
 /* ————————————————————————————————
-   PRZYCISKI ZAKŁADEK — prostokątne, Apple minimal
+   ZAKŁADKI (C2-A Apple pastel)
 ———————————————————————————————— */
 .tabs {
   display: flex;
@@ -66,13 +69,13 @@ body {
 .tab {
   padding: 10px 20px;
   background: #e9e9ec;
-  border-radius: 8px;
+  border-radius: 999px;
   cursor: pointer;
   font-size: 0.95rem;
   transition: 0.25s;
   color: #3a3a3c;
-  border: 1px solid #d7d7db;
   user-select: none;
+  border: 1px solid #d7d7db;
 }
 
 .tab:hover {
@@ -81,10 +84,12 @@ body {
 
 .tab.active {
   background: #ffffff;
-  border-color: #cfcfd4;
   box-shadow: 0 3px 10px rgba(0,0,0,0.10);
   font-weight: 600;
+  color: #1c1c1e;
+  border-color: #cfcfd4;
 }
+
 
 /* ————————————————————————————————
    WYSZUKIWARKA + SORTOWANIE
@@ -114,24 +119,12 @@ body {
 }
 
 /* ————————————————————————————————
-   GRID — 3 kursy w rzędzie
+   GRID KURSÓW
 ———————————————————————————————— */
 .courses-grid {
   display: none;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-@media (max-width: 900px) {
-  .courses-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .courses-grid {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
 }
 
 .courses-grid.active {
@@ -140,14 +133,14 @@ body {
 
 .course-card {
   background: var(--card-bg);
-  padding: 18px;
+  padding: 16px;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   text-decoration: none;
   color: var(--text-main);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   transition: 0.2s;
 }
 
@@ -174,6 +167,7 @@ body {
   display: inline-block;
 }
 
+/* Highlight wyszukiwanej frazy */
 mark {
   background: yellow;
   padding: 0 2px;
@@ -192,6 +186,9 @@ mark {
   <div class="subtitle">Nowoczesne kursy online — Poziomy A/B/C + Językowe + Nauczyciele</div>
 </header>
 
+<!-- ————————————————————————————————
+     ZAKŁADKI
+———————————————————————————————— -->
 <div class="tabs">
   <div class="tab active" data-target="tabA">Poziom A</div>
   <div class="tab" data-target="tabB">Poziom B</div>
@@ -200,6 +197,9 @@ mark {
   <div class="tab" data-target="tabTeach">Nauczyciele</div>
 </div>
 
+<!-- ————————————————————————————————
+     WYSZUKIWARKA + SORTOWANIE
+———————————————————————————————— -->
 <div class="search-sort-bar">
   <input id="searchInput" type="text" placeholder="Wyszukaj kurs..." />
   <select id="sortSelect">
@@ -211,192 +211,1163 @@ mark {
   </select>
 </div>
 
-<section id="tabA" class="courses-grid active"></section>
-<section id="tabB" class="courses-grid"></section>
-<section id="tabC" class="courses-grid"></section>
-<section id="tabLang" class="courses-grid"></section>
-<section id="tabTeach" class="courses-grid"></section>
-<a class="course-card" data-title="A1 Podstawy obsługi komputera" data-level="A" data-tag="komputer" href="#"><div class="course-title">A1. Podstawy obsługi komputera</div><div class="course-meta">Pierwsze kroki, myszka, klawiatura, system.</div><div class="course-tag">Komputer</div></a>
-<a class="course-card" data-title="A2 Internet od podstaw" data-level="A" data-tag="internet" href="#"><div class="course-title">A2. Internet od podstaw</div><div class="course-meta">Przeglądarki, wyszukiwanie, bezpieczeństwo.</div><div class="course-tag">Internet</div></a>
-<a class="course-card" data-title="A3 E-mail od podstaw" data-level="A" data-tag="email" href="#"><div class="course-title">A3. E-mail od podstaw</div><div class="course-meta">Zakładanie konta, wysyłanie, załączniki.</div><div class="course-tag">E-mail</div></a>
-<a class="course-card" data-title="A4 Word podstawy" data-level="A" data-tag="word" href="#"><div class="course-title">A4. Word — podstawy</div><div class="course-meta">Pisanie, formatowanie, zapisywanie.</div><div class="course-tag">Word</div></a>
-<a class="course-card" data-title="A5 Excel podstawy" data-level="A" data-tag="excel" href="#"><div class="course-title">A5. Excel — podstawy</div><div class="course-meta">Tabele, formuły, wykresy.</div><div class="course-tag">Excel</div></a>
-<a class="course-card" data-title="A6 PowerPoint podstawy" data-level="A" data-tag="powerpoint" href="#"><div class="course-title">A6. PowerPoint — podstawy</div><div class="course-meta">Slajdy, grafiki, prezentacje.</div><div class="course-tag">PowerPoint</div></a>
-<a class="course-card" data-title="A7 Windows podstawy" data-level="A" data-tag="windows" href="#"><div class="course-title">A7. Windows — podstawy</div><div class="course-meta">Ustawienia, pliki, personalizacja.</div><div class="course-tag">Windows</div></a>
-<a class="course-card" data-title="A8 macOS podstawy" data-level="A" data-tag="macos" href="#"><div class="course-title">A8. macOS — podstawy</div><div class="course-meta">Finder, aplikacje, skróty.</div><div class="course-tag">macOS</div></a>
-<a class="course-card" data-title="A9 Bezpieczeństwo w sieci" data-level="A" data-tag="bezpieczeństwo" href="#"><div class="course-title">A9. Bezpieczeństwo w sieci</div><div class="course-meta">Hasła, phishing, ochrona danych.</div><div class="course-tag">Bezpieczeństwo</div></a>
-<a class="course-card" data-title="A10 Praca z dokumentami" data-level="A" data-tag="dokumenty" href="#"><div class="course-title">A10. Praca z dokumentami</div><div class="course-meta">PDF, skany, podpisy.</div><div class="course-tag">Dokumenty</div></a>
-<a class="course-card" data-title="A11 Google Workspace" data-level="A" data-tag="chmura" href="#"><div class="course-title">A11. Google Workspace</div><div class="course-meta">Gmail, Dysk, Dokumenty.</div><div class="course-tag">Chmura</div></a>
-<a class="course-card" data-title="A12 Smartfon podstawy" data-level="A" data-tag="mobile" href="#"><div class="course-title">A12. Smartfon — podstawy</div><div class="course-meta">Android/iOS, aplikacje, bezpieczeństwo.</div><div class="course-tag">Mobile</div></a>
-<a class="course-card" data-title="A13 Chmura podstawy" data-level="A" data-tag="chmura" href="#"><div class="course-title">A13. Chmura — podstawy</div><div class="course-meta">OneDrive, Google Drive, Dropbox.</div><div class="course-tag">Chmura</div></a>
-<a class="course-card" data-title="A14 Grafika komputerowa" data-level="A" data-tag="grafika" href="#"><div class="course-title">A14. Grafika komputerowa</div><div class="course-meta">Formaty, kolory, edycja.</div><div class="course-tag">Grafika</div></a>
-<a class="course-card" data-title="A15 Canva podstawy" data-level="A" data-tag="canva" href="#"><div class="course-title">A15. Canva — podstawy</div><div class="course-meta">Grafiki, posty, banery.</div><div class="course-tag">Canva</div></a>
-<a class="course-card" data-title="A16 Montaż wideo" data-level="A" data-tag="wideo" href="#"><div class="course-title">A16. Montaż wideo</div><div class="course-meta">Cięcie, muzyka, efekty.</div><div class="course-tag">Wideo</div></a>
-<a class="course-card" data-title="A17 Programowanie podstawy" data-level="A" data-tag="programowanie" href="#"><div class="course-title">A17. Programowanie — podstawy</div><div class="course-meta">Zmienne, pętle, logika.</div><div class="course-tag">Programowanie</div></a>
-<a class="course-card" data-title="A18 HTML i CSS" data-level="A" data-tag="web" href="#"><div class="course-title">A18. HTML i CSS</div><div class="course-meta">Tworzenie stron WWW.</div><div class="course-tag">Web</div></a>
-<a class="course-card" data-title="A19 Angielski podstawy" data-level="A" data-tag="języki" href="#"><div class="course-title">A19. Angielski — podstawy</div><div class="course-meta">Zwroty, słownictwo, gramatyka.</div><div class="course-tag">Angielski</div></a>
-<a class="course-card" data-title="A20 Niemiecki podstawy" data-level="A" data-tag="języki" href="#"><div class="course-title">A20. Niemiecki — podstawy</div><div class="course-meta">Codzienne sytuacje, gramatyka.</div><div class="course-tag">Niemiecki</div></a>
-<a class="course-card" data-title="B1 Excel średnio zaawansowany" data-level="B" data-tag="excel" href="#"><div class="course-title">B1. Excel — średnio zaawansowany</div><div class="course-meta">Formuły, funkcje, tabele przestawne.</div><div class="course-tag">Excel</div></a>
-<a class="course-card" data-title="B2 Word średnio zaawansowany" data-level="B" data-tag="word" href="#"><div class="course-title">B2. Word — średnio zaawansowany</div><div class="course-meta">Style, nagłówki, automatyzacja.</div><div class="course-tag">Word</div></a>
-<a class="course-card" data-title="B3 PowerPoint średnio zaawansowany" data-level="B" data-tag="powerpoint" href="#"><div class="course-title">B3. PowerPoint — średnio zaawansowany</div><div class="course-meta">Animacje, szablony, prezentacje.</div><div class="course-tag">PowerPoint</div></a>
-<a class="course-card" data-title="B4 Windows średnio zaawansowany" data-level="B" data-tag="windows" href="#"><div class="course-title">B4. Windows — średnio zaawansowany</div><div class="course-meta">Zarządzanie systemem, optymalizacja.</div><div class="course-tag">Windows</div></a>
-<a class="course-card" data-title="B5 macOS średnio zaawansowany" data-level="B" data-tag="macos" href="#"><div class="course-title">B5. macOS — średnio zaawansowany</div><div class="course-meta">Automatyzacja, skróty, system.</div><div class="course-tag">macOS</div></a>
-<a class="course-card" data-title="B6 Internet średnio zaawansowany" data-level="B" data-tag="internet" href="#"><div class="course-title">B6. Internet — średnio zaawansowany</div><div class="course-meta">Bezpieczeństwo, narzędzia, konfiguracja.</div><div class="course-tag">Internet</div></a>
-<a class="course-card" data-title="B7 Programowanie średnio zaawansowane" data-level="B" data-tag="programowanie" href="#"><div class="course-title">B7. Programowanie — średnio zaawansowane</div><div class="course-meta">Funkcje, obiekty, projekty.</div><div class="course-tag">Programowanie</div></a>
-<a class="course-card" data-title="B8 HTML i CSS średnio zaawansowane" data-level="B" data-tag="web" href="#"><div class="course-title">B8. HTML i CSS — średnio zaawansowane</div><div class="course-meta">Responsywność, layouty.</div><div class="course-tag">Web</div></a>
-<a class="course-card" data-title="B9 Canva średnio zaawansowana" data-level="B" data-tag="canva" href="#"><div class="course-title">B9. Canva — średnio zaawansowana</div><div class="course-meta">Branding, szablony, projekty.</div><div class="course-tag">Canva</div></a>
-<a class="course-card" data-title="B10 Montaż wideo średnio zaawansowany" data-level="B" data-tag="wideo" href="#"><div class="course-title">B10. Montaż wideo — średnio zaawansowany</div><div class="course-meta">Efekty, przejścia, narracja.</div><div class="course-tag">Wideo</div></a>
-<a class="course-card" data-title="B11 Grafika komputerowa średnio zaawansowana" data-level="B" data-tag="grafika" href="#"><div class="course-title">B11. Grafika komputerowa — średnio zaawansowana</div><div class="course-meta">Warstwy, retusz, kompozycja.</div><div class="course-tag">Grafika</div></a>
-<a class="course-card" data-title="B12 Chmura średnio zaawansowana" data-level="B" data-tag="chmura" href="#"><div class="course-title">B12. Chmura — średnio zaawansowana</div><div class="course-meta">Automatyzacja, współpraca, backup.</div><div class="course-tag">Chmura</div></a>
-<a class="course-card" data-title="B13 Smartfon średnio zaawansowany" data-level="B" data-tag="mobile" href="#"><div class="course-title">B13. Smartfon — średnio zaawansowany</div><div class="course-meta">Zarządzanie, aplikacje, bezpieczeństwo.</div><div class="course-tag">Mobile</div></a>
-<a class="course-card" data-title="B14 WordPress podstawy" data-level="B" data-tag="web" href="#"><div class="course-title">B14. WordPress — podstawy</div><div class="course-meta">Strony, motywy, wtyczki.</div><div class="course-tag">Web</div></a>
-<a class="course-card" data-title="B15 E-commerce podstawy" data-level="B" data-tag="ecommerce" href="#"><div class="course-title">B15. E‑commerce — podstawy</div><div class="course-meta">Sklepy, płatności, logistyka.</div><div class="course-tag">E‑commerce</div></a>
-<a class="course-card" data-title="B16 Fotografia średnio zaawansowana" data-level="B" data-tag="fotografia" href="#"><div class="course-title">B16. Fotografia — średnio zaawansowana</div><div class="course-meta">Kompozycja, światło, RAW.</div><div class="course-tag">Fotografia</div></a>
-<a class="course-card" data-title="B17 Podcasting średnio zaawansowany" data-level="B" data-tag="audio" href="#"><div class="course-title">B17. Podcasting — średnio zaawansowany</div><div class="course-meta">Dźwięk, montaż, publikacja.</div><div class="course-tag">Audio</div></a>
-<a class="course-card" data-title="B18 Wystąpienia publiczne średnio zaawansowane" data-level="B" data-tag="wystąpienia" href="#"><div class="course-title">B18. Wystąpienia publiczne — średnio zaawansowane</div><div class="course-meta">Głos, treść, prezentacja.</div><div class="course-tag">Wystąpienia</div></a>
-<a class="course-card" data-title="B19 Asertywność średnio zaawansowana" data-level="B" data-tag="komunikacja" href="#"><div class="course-title">B19. Asertywność — średnio zaawansowana</div><div class="course-meta">Granice, komunikacja, relacje.</div><div class="course-tag">Komunikacja</div></a>
-<a class="course-card" data-title="B20 AI w praktyce" data-level="B" data-tag="ai" href="#"><div class="course-title">B20. AI w praktyce</div><div class="course-meta">Automatyzacja, narzędzia, workflow.</div><div class="course-tag">AI</div></a>
-<a class="course-card" data-title="C1 Excel zaawansowany" data-level="C" data-tag="excel" href="#"><div class="course-title">C1. Excel — zaawansowany</div><div class="course-meta">PowerQuery, makra, automatyzacja.</div><div class="course-tag">Excel</div></a>
-<a class="course-card" data-title="C2 Word zaawansowany" data-level="C" data-tag="word" href="#"><div class="course-title">C2. Word — zaawansowany</div><div class="course-meta">Style, dokumenty profesjonalne.</div><div class="course-tag">Word</div></a>
-<a class="course-card" data-title="C3 PowerPoint zaawansowany" data-level="C" data-tag="powerpoint" href="#"><div class="course-title">C3. PowerPoint — zaawansowany</div><div class="course-meta">Prezentacje premium.</div><div class="course-tag">PowerPoint</div></a>
-<a class="course-card" data-title="C4 Programowanie zaawansowane" data-level="C" data-tag="programowanie" href="#"><div class="course-title">C4. Programowanie — zaawansowane</div><div class="course-meta">Algorytmy, projekty, architektura.</div><div class="course-tag">Programowanie</div></a>
-<a class="course-card" data-title="C5 HTML i CSS zaawansowane" data-level="C" data-tag="web" href="#"><div class="course-title">C5. HTML i CSS — zaawansowane</div><div class="course-meta">Frameworki, animacje, layouty.</div><div class="course-tag">Web</div></a>
-<a class="course-card" data-title="C6 Canva zaawansowana" data-level="C" data-tag="canva" href="#"><div class="course-title">C6. Canva — zaawansowana</div><div class="course-meta">Branding, kampanie, projekty PRO.</div><div class="course-tag">Canva</div></a>
-<a class="course-card" data-title="C7 Montaż wideo zaawansowany" data-level="C" data-tag="wideo" href="#"><div class="course-title">C7. Montaż wideo — zaawansowany</div><div class="course-meta
-                                                                                                                                                                            <a class="course-card" data-title="C7 Montaż wideo zaawansowany" data-level="C" data-tag="wideo" href="#"><div class="course-title">C7. Montaż wideo — zaawansowany</div><div class="course-meta">Color grading, efekty, storytelling.</div><div class="course-tag">Wideo</div></a>
-<a class="course-card" data-title="C8 Grafika komputerowa zaawansowana" data-level="C" data-tag="grafika" href="#"><div class="course-title">C8. Grafika komputerowa — zaawansowana</div><div class="course-meta">Retusz PRO, kompozycja, kolory.</div><div class="course-tag">Grafika</div></a>
-<a class="course-card" data-title="C9 Chmura zaawansowana" data-level="C" data-tag="chmura" href="#"><div class="course-title">C9. Chmura — zaawansowana</div><div class="course-meta">Automatyzacja, integracje, workflow.</div><div class="course-tag">Chmura</div></a>
-<a class="course-card" data-title="C10 WordPress zaawansowany" data-level="C" data-tag="web" href="#"><div class="course-title">C10. WordPress — zaawansowany</div><div class="course-meta">Custom post types, optymalizacja.</div><div class="course-tag">Web</div></a>
-<a class="course-card" data-title="C11 E-commerce zaawansowany" data-level="C" data-tag="ecommerce" href="#"><div class="course-title">C11. E‑commerce — zaawansowany</div><div class="course-meta">Konwersje, analityka, automatyzacja.</div><div class="course-tag">E‑commerce</div></a>
-<a class="course-card" data-title="C12 Fotografia zaawansowana" data-level="C" data-tag="fotografia" href="#"><div class="course-title">C12. Fotografia — zaawansowana</div><div class="course-meta">RAW, światło, profesjonalne sesje.</div><div class="course-tag">Fotografia</div></a>
-<a class="course-card" data-title="C13 Podcasting zaawansowany" data-level="C" data-tag="audio" href="#"><div class="course-title">C13. Podcasting — zaawansowany</div><div class="course-meta">Mastering, narracja, produkcja.</div><div class="course-tag">Audio</div></a>
-<a class="course-card" data-title="C14 Wystąpienia publiczne PRO" data-level="C" data-tag="wystąpienia" href="#"><div class="course-title">C14. Wystąpienia publiczne — PRO</div><div class="course-meta">Scena, kamera, storytelling.</div><div class="course-tag">Wystąpienia</div></a>
-<a class="course-card" data-title="C15 AI zaawansowane" data-level="C" data-tag="ai" href="#"><div class="course-title">C15. AI — zaawansowane</div><div class="course-meta">Modele, automatyzacje, integracje.</div><div class="course-tag">AI</div></a>
-<a class="course-card" data-title="L1 Angielski A1" data-level="A" data-tag="angielski" href="#"><div class="course-title">Angielski A1</div><div class="course-meta">Podstawy komunikacji.</div><div class="course-tag">Angielski</div></a>
-<a class="course-card" data-title="L2 Angielski A2" data-level="A" data-tag="angielski" href="#"><div class="course-title">Angielski A2</div><div class="course-meta">Codzienne sytuacje.</div><div class="course-tag">Angielski</div></a>
-<a class="course-card" data-title="L3 Angielski B1" data-level="B" data-tag="angielski" href="#"><div class="course-title">Angielski B1</div><div class="course-meta">Komunikacja w pracy.</div><div class="course-tag">Angielski</div></a>
-<a class="course-card" data-title="L4 Angielski B2" data-level="B" data-tag="angielski" href="#"><div class="course-title">Angielski B2</div><div class="course-meta">Płynność językowa.</div><div class="course-tag">Angielski</div></a>
-<a class="course-card" data-title="L5 Angielski C1" data-level="C" data-tag="angielski" href="#"><div class="course-title">Angielski C1</div><div class="course-meta">Zaawansowana komunikacja.</div><div class="course-tag">Angielski</div></a>
-<a class="course-card" data-title="L6 Niemiecki A1" data-level="A" data-tag="niemiecki" href="#"><div class="course-title">Niemiecki A1</div><div class="course-meta">Podstawy języka.</div><div class="course-tag">Niemiecki</div></a>
-<a class="course-card" data-title="L7 Niemiecki A2" data-level="A" data-tag="niemiecki" href="#"><div class="course-title">Niemiecki A2</div><div class="course-meta">Sytuacje codzienne.</div><div class="course-tag">Niemiecki</div></a>
-<a class="course-card" data-title="L8 Niemiecki B1" data-level="B" data-tag="niemiecki" href="#"><div class="course-title">Niemiecki B1</div><div class="course-meta">Komunikacja w pracy.</div><div class="course-tag">Niemiecki</div></a>
-<a class="course-card" data-title="L9 Hiszpański A1" data-level="A" data-tag="hiszpański" href="#"><div class="course-title">Hiszpański A1</div><div class="course-meta">Podstawy języka.</div><div class="course-tag">Hiszpański</div></a>
-<a class="course-card" data-title="L10 Hiszpański A2" data-level="A" data-tag="hiszpański" href="#"><div class="course-title">Hiszpański A2</div><div class="course-meta">Sytuacje codzienne.</div><div class="course-tag">Hiszpański</div></a>
-<a class="course-card" data-title="L11 Francuski A1" data-level="A" data-tag="francuski" href="#"><div class="course-title">Francuski A1</div><div class="course-meta">Podstawy komunikacji.</div><div class="course-tag">Francuski</div></a>
-<a class="course-card" data-title="L12 Włoski A1" data-level="A" data-tag="włoski" href="#"><div class="course-title">Włoski A1</div><div class="course-meta">Podstawy języka.</div><div class="course-tag">Włoski</div></a>
-<a class="course-card" data-title="L13 Norweski A1" data-level="A" data-tag="norweski" href="#"><div class="course-title">Norweski A1</div><div class="course-meta">Podstawy języka.</div><div class="course-tag">Norweski</div></a>
-<a class="course-card" data-title="L14 Szwedzki A1" data-level="A" data-tag="szwedzki" href="#"><div class="course-title">Szwedzki A1</div><div class="course-meta">Podstawy języka.</div><div class="course-tag">Szwedzki</div></a>
-<a class="course-card" data-title="L15 Japoński A1" data-level="A" data-tag="japoński" href="#"><div class="course-title">Japoński A1</div><div class="course-meta">Hiragana, podstawy.</div><div class="course-tag">Japoński</div></a>
-<a class="course-card" data-title="T1 Awans zawodowy nauczyciela" data-level="T" data-tag="nauczyciele" href="#"><div class="course-title">T1. Awans zawodowy nauczyciela</div><div class="course-meta">Dokumentacja, wymagania, procedury.</div><div class="course-tag">Nauczyciele</div></a>
-<a class="course-card" data-title="T2 Dokumentacja nauczyciela" data-level="T" data-tag="nauczyciele" href="#"><div class="course-title">T2. Dokumentacja nauczyciela</div><div class="course-meta">Dzienniki, plany, raporty.</div><div class="course-tag">Nauczyciele</div></a>
-<a class="course-card" data-title="T3 Planowanie lekcji" data-level="T" data-tag="nauczyciele" href="#"><div class="course-title">T3. Planowanie lekcji</div><div class="course-meta">Cele, metody, materiały.</div><div class="course-tag">Nauczyciele</div></a>
-<a class="course-card" data-title="T4 Zarządzanie klasą" data-level="T" data-tag="nauczyciele" href="#"><div class="course-title">T4. Zarządzanie klasą</div><div class="course-meta">Dyscyplina, komunikacja.</div><div class="course-tag">Nauczyciele</div></a>
-<a class="course-card" data-title="T5 Ocenianie uczniów" data-level="T" data-tag="nauczyciele" href="#"><div class="course-title">T5. Ocenianie uczniów</div><div class="course-meta">Kryteria, narzędzia, przykłady.</div><div class="course-tag">Nauczyciele</div></a>
-<a class="course-card" data-title="T6 Metody aktywizujące" data-level="T" data-tag="nauczyciele" href="#"><div class="course-title">T6. Metody aktywizujące</div><div class="course-meta">Burza mózgów, drama, projekty.</div><div class="course-tag">Nauczyciele</div></a>
-<a class="course-card" data-title="T7 Praca z uczniem trudnym" data-level="T" data-tag="nauczyciele" href="#"><div class="course-title">T7. Praca z uczniem trudnym</div><div class="course-meta">Strategie, komunikacja.</div><div class="course-tag">Nauczyciele</div></a>
-<a class="course-card" data-title="T8 TIK w edukacji" data-level="T" data-tag="nauczyciele" href="#"><div class="course-title">T8. TIK w edukacji</div><div class="course-meta">Nowoczesne narzędzia.</div><div class="course-tag">Nauczyciele</div></a>
-<a class="course-card" data-title="T9 Prawo oświatowe" data-level="T" data-tag="nauczyciele" href="#"><div class="course-title">T9. Prawo oświatowe</div><div class="course-meta">Obowiązki, przepisy.</div><div class="course-tag">Nauczyciele</div></a>
-<a class="course-card" data-title="T10 Współpraca z rodzicami" data-level="T" data-tag="nauczyciele" href="#"><div class="course-title">T10. Współpraca z rodzicami</div><div class="course-meta">Komunikacja, spotkania.</div><div class="course-tag">Nauczyciele</div></a>
+<!-- ————————————————————————————————
+     SEKCJE KURSÓW (puste — wypełnisz w częściach 2–6)
+———————————————————————————————— -->
+
+<section id="tabA" class="courses-grid active">
+  <!-- tutaj wkleisz kursy A z części 2/6 -->
+</section>
+
+<section id="tabB" class="courses-grid">
+  <!-- tutaj wkleisz kursy B z części 3/6 -->
+</section>
+
+<section id="tabC" class="courses-grid">
+  <!-- tutaj wkleisz kursy C z części 4/6 -->
+</section>
+
+<section id="tabLang" class="courses-grid">
+  <!-- tutaj wkleisz kursy językowe z części 5/6 -->
+</section>
+
+<section id="tabTeach" class="courses-grid">
+  <!-- tutaj wkleisz kursy nauczycielskie z części 6/6 -->
+</section>
+<!-- ————————————————————————————————
+     POZIOM A — KURSY PODSTAWOWE
+———————————————————————————————— -->
+
+<a class="course-card" data-title="A1 Podstawy obsługi komputera" data-level="A" data-tag="komputer" href="#">
+  <div class="course-title">A1. Podstawy obsługi komputera</div>
+  <div class="course-meta">Pierwsze kroki, myszka, klawiatura, system.</div>
+  <div class="course-tag">Komputer</div>
+</a>
+
+<a class="course-card" data-title="A2 Internet od podstaw" data-level="A" data-tag="internet" href="#">
+  <div class="course-title">A2. Internet od podstaw</div>
+  <div class="course-meta">Przeglądarki, wyszukiwanie, bezpieczeństwo.</div>
+  <div class="course-tag">Internet</div>
+</a>
+
+<a class="course-card" data-title="A3 E-mail od podstaw" data-level="A" data-tag="email" href="#">
+  <div class="course-title">A3. E-mail od podstaw</div>
+  <div class="course-meta">Zakładanie konta, wysyłanie, załączniki.</div>
+  <div class="course-tag">E-mail</div>
+</a>
+
+<a class="course-card" data-title="A4 Podstawy Word" data-level="A" data-tag="word" href="#">
+  <div class="course-title">A4. Word — podstawy</div>
+  <div class="course-meta">Pisanie, formatowanie, zapisywanie.</div>
+  <div class="course-tag">Word</div>
+</a>
+
+<a class="course-card" data-title="A5 Podstawy Excel" data-level="A" data-tag="excel" href="#">
+  <div class="course-title">A5. Excel — podstawy</div>
+  <div class="course-meta">Tabele, formuły, wykresy.</div>
+  <div class="course-tag">Excel</div>
+</a>
+
+<a class="course-card" data-title="A6 Podstawy PowerPoint" data-level="A" data-tag="powerpoint" href="#">
+  <div class="course-title">A6. PowerPoint — podstawy</div>
+  <div class="course-meta">Slajdy, grafiki, prezentacje.</div>
+  <div class="course-tag">PowerPoint</div>
+</a>
+
+<a class="course-card" data-title="A7 Podstawy Windows" data-level="A" data-tag="windows" href="#">
+  <div class="course-title">A7. Windows — podstawy</div>
+  <div class="course-meta">Ustawienia, pliki, personalizacja.</div>
+  <div class="course-tag">Windows</div>
+</a>
+
+<a class="course-card" data-title="A8 Podstawy macOS" data-level="A" data-tag="macos" href="#">
+  <div class="course-title">A8. macOS — podstawy</div>
+  <div class="course-meta">Finder, aplikacje, skróty.</div>
+  <div class="course-tag">macOS</div>
+</a>
+
+<a class="course-card" data-title="A9 Podstawy bezpieczeństwa w sieci" data-level="A" data-tag="bezpieczeństwo" href="#">
+  <div class="course-title">A9. Bezpieczeństwo w sieci — podstawy</div>
+  <div class="course-meta">Hasła, phishing, ochrona danych.</div>
+  <div class="course-tag">Bezpieczeństwo</div>
+</a>
+
+<a class="course-card" data-title="A10 Podstawy pracy z dokumentami" data-level="A" data-tag="dokumenty" href="#">
+  <div class="course-title">A10. Praca z dokumentami — podstawy</div>
+  <div class="course-meta">PDF, skany, podpisy.</div>
+  <div class="course-tag">Dokumenty</div>
+</a>
+
+<a class="course-card" data-title="A11 Podstawy Google Workspace" data-level="A" data-tag="chmura" href="#">
+  <div class="course-title">A11. Google Workspace — podstawy</div>
+  <div class="course-meta">Gmail, Dysk, Dokumenty.</div>
+  <div class="course-tag">Chmura</div>
+</a>
+
+<a class="course-card" data-title="A12 Podstawy obsługi smartfona" data-level="A" data-tag="mobile" href="#">
+  <div class="course-title">A12. Smartfon — podstawy</div>
+  <div class="course-meta">Android/iOS, aplikacje, bezpieczeństwo.</div>
+  <div class="course-tag">Mobile</div>
+</a>
+
+<a class="course-card" data-title="A13 Podstawy pracy z chmurą" data-level="A" data-tag="chmura" href="#">
+  <div class="course-title">A13. Chmura — podstawy</div>
+  <div class="course-meta">OneDrive, Google Drive, Dropbox.</div>
+  <div class="course-tag">Chmura</div>
+</a>
+
+<a class="course-card" data-title="A14 Podstawy grafiki komputerowej" data-level="A" data-tag="grafika" href="#">
+  <div class="course-title">A14. Grafika komputerowa — podstawy</div>
+  <div class="course-meta">Formaty, kolory, edycja.</div>
+  <div class="course-tag">Grafika</div>
+</a>
+
+<a class="course-card" data-title="A15 Canva od podstaw" data-level="A" data-tag="canva" href="#">
+  <div class="course-title">A15. Canva — podstawy</div>
+  <div class="course-meta">Grafiki, posty, banery.</div>
+  <div class="course-tag">Canva</div>
+</a>
+
+<a class="course-card" data-title="A16 Podstawy montażu wideo" data-level="A" data-tag="wideo" href="#">
+  <div class="course-title">A16. Montaż wideo — podstawy</div>
+  <div class="course-meta">Cięcie, muzyka, efekty.</div>
+  <div class="course-tag">Wideo</div>
+</a>
+
+<a class="course-card" data-title="A17 Podstawy programowania" data-level="A" data-tag="programowanie" href="#">
+  <div class="course-title">A17. Programowanie — podstawy</div>
+  <div class="course-meta">Zmienne, pętle, logika.</div>
+  <div class="course-tag">Programowanie</div>
+</a>
+
+<a class="course-card" data-title="A18 HTML i CSS podstawy" data-level="A" data-tag="web" href="#">
+  <div class="course-title">A18. HTML i CSS — podstawy</div>
+  <div class="course-meta">Tworzenie stron WWW.</div>
+  <div class="course-tag">Web</div>
+</a>
+
+<a class="course-card" data-title="A19 Podstawy języka angielskiego" data-level="A" data-tag="języki" href="#">
+  <div class="course-title">A19. Angielski — podstawy</div>
+  <div class="course-meta">Zwroty, słownictwo, gramatyka.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="A20 Podstawy języka niemieckiego" data-level="A" data-tag="języki" href="#">
+  <div class="course-title">A20. Niemiecki — podstawy</div>
+  <div class="course-meta">Codzienne sytuacje, gramatyka.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="A21 Podstawy pracy z PDF" data-level="A" data-tag="dokumenty" href="#">
+  <div class="course-title">A21. PDF — podstawy</div>
+  <div class="course-meta">Łączenie, podpisy, edycja.</div>
+  <div class="course-tag">Dokumenty</div>
+</a>
+
+<a class="course-card" data-title="A22 Podstawy obsługi drukarki" data-level="A" data-tag="sprzęt" href="#">
+  <div class="course-title">A22. Drukarka — podstawy</div>
+  <div class="course-meta">Instalacja, konfiguracja, skanowanie.</div>
+  <div class="course-tag">Sprzęt</div>
+</a>
+
+<a class="course-card" data-title="A23 Podstawy bezpieczeństwa komputerowego" data-level="A" data-tag="bezpieczeństwo" href="#">
+  <div class="course-title">A23. Bezpieczeństwo komputerowe</div>
+  <div class="course-meta">Antywirus, kopie zapasowe.</div>
+  <div class="course-tag">Bezpieczeństwo</div>
+</a>
+
+<a class="course-card" data-title="A24 Podstawy sprzedaży online" data-level="A" data-tag="sprzedaż" href="#">
+  <div class="course-title">A24. Sprzedaż online — podstawy</div>
+  <div class="course-meta">Marketplace, OLX, Allegro.</div>
+  <div class="course-tag">Sprzedaż</div>
+</a>
+
+<a class="course-card" data-title="A25 Podstawy e-commerce" data-level="A" data-tag="ecommerce" href="#">
+  <div class="course-title">A25. E‑commerce — podstawy</div>
+  <div class="course-meta">Sklepy, płatności, logistyka.</div>
+  <div class="course-tag">E‑commerce</div>
+</a>
+
+<a class="course-card" data-title="A26 Podstawy obsługi aparatu" data-level="A" data-tag="fotografia" href="#">
+  <div class="course-title">A26. Aparat — podstawy</div>
+  <div class="course-meta">ISO, czas, przysłona.</div>
+  <div class="course-tag">Fotografia</div>
+</a>
+
+<a class="course-card" data-title="A27 Podstawy rysunku" data-level="A" data-tag="rysunek" href="#">
+  <div class="course-title">A27. Rysunek — podstawy</div>
+  <div class="course-meta">Linie, proporcje, światłocień.</div>
+  <div class="course-tag">Rysunek</div>
+</a>
+
+<a class="course-card" data-title="A28 Podstawy gotowania" data-level="A" data-tag="kuchnia" href="#">
+  <div class="course-title">A28. Gotowanie — podstawy</div>
+  <div class="course-meta">Techniki, przyprawy, proste dania.</div>
+  <div class="course-tag">Kuchnia</div>
+</a>
+
+<a class="course-card" data-title="A29 Podstawy ogrodnictwa" data-level="A" data-tag="ogród" href="#">
+  <div class="course-title">A29. Ogrodnictwo — podstawy</div>
+  <div class="course-meta">Nawożenie, podlewanie, sadzenie.</div>
+  <div class="course-tag">Ogród</div>
+</a>
+
+<a class="course-card" data-title="A30 Podstawy majsterkowania" data-level="A" data-tag="diy" href="#">
+  <div class="course-title">A30. Majsterkowanie — podstawy</div>
+  <div class="course-meta">Narzędzia, wiercenie, naprawy.</div>
+  <div class="course-tag">DIY</div>
+</a>
+
+<a class="course-card" data-title="A31 Podstawy druku 3D" data-level="A" data-tag="druk3d" href="#">
+  <div class="course-title">A31. Druk 3D — podstawy</div>
+  <div class="course-meta">Modele, filamenty, drukarki.</div>
+  <div class="course-tag">Druk 3D</div>
+</a>
+
+<a class="course-card" data-title="A32 Podstawy elektroniki" data-level="A" data-tag="elektronika" href="#">
+  <div class="course-title">A32. Elektronika — podstawy</div>
+  <div class="course-meta">Obwody, rezystory, lutowanie.</div>
+  <div class="course-tag">Elektronika</div>
+</a>
+
+<a class="course-card" data-title="A33 Podstawy gry na gitarze" data-level="A" data-tag="muzyka" href="#">
+  <div class="course-title">A33. Gitara — podstawy</div>
+  <div class="course-meta">Akordy, rytm, pierwsze piosenki.</div>
+  <div class="course-tag">Muzyka</div>
+</a>
+
+<a class="course-card" data-title="A34 Podstawy gry na pianinie" data-level="A" data-tag="muzyka" href="#">
+  <div class="course-title">A34. Pianino — podstawy</div>
+  <div class="course-meta">Skale, akordy, melodie.</div>
+  <div class="course-tag">Muzyka</div>
+</a>
+
+<a class="course-card" data-title="A35 Podstawy szachów" data-level="A" data-tag="szachy" href="#">
+  <div class="course-title">A35. Szachy — podstawy</div>
+  <div class="course-meta">Figury, ruchy, strategie.</div>
+  <div class="course-tag">Szachy</div>
+</a>
+
+<a class="course-card" data-title="A36 Podstawy podcastingu" data-level="A" data-tag="audio" href="#">
+  <div class="course-title">A36. Podcasting — podstawy</div>
+  <div class="course-meta">Nagrywanie, mikrofony, montaż.</div>
+  <div class="course-tag">Audio</div>
+</a>
+
+<a class="course-card" data-title="A37 Podstawy tworzenia e-booków" data-level="A" data-tag="publikacje" href="#">
+  <div class="course-title">A37. E‑booki — podstawy</div>
+  <div class="course-meta">Formaty, struktura, publikacja.</div>
+  <div class="course-tag">Publikacje</div>
+</a>
+
+<a class="course-card" data-title="A38 Podstawy wystąpień publicznych" data-level="A" data-tag="wystąpienia" href="#">
+  <div class="course-title">A38. Wystąpienia publiczne — podstawy</div>
+  <div class="course-meta">Głos, postawa, treść.</div>
+  <div class="course-tag">Wystąpienia</div>
+</a>
+
+<a class="course-card" data-title="A39 Podstawy asertywności" data-level="A" data-tag="komunikacja" href="#">
+  <div class="course-title">A39. Asertywność — podstawy</div>
+  <div class="course-meta">Granice, komunikacja, pewność siebie.</div>
+  <div class="course-tag">Komunikacja</div>
+</a>
+
+<a class="course-card" data-title="A40 Podstawy pracy z AI" data-level="A" data-tag="ai" href="#">
+  <div class="course-title">A40. Praca z AI — podstawy</div>
+  <div class="course-meta">Pisanie promptów, automatyzacja.</div>
+  <div class="course-tag">AI</div>
+</a>
+
+<!-- ————————————————————————————————
+     KURSY JĘZYKOWE POZIOMU A (NOWE)
+———————————————————————————————— -->
+
+<a class="course-card" data-title="A41 Angielski od podstaw" data-level="A" data-tag="języki" href="#">
+  <div class="course-title">A41. Angielski od podstaw</div>
+  <div class="course-meta">Najważniejsze słówka i zwroty.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="A42 Niemiecki od podstaw" data-level="A" data-tag="języki" href="#">
+  <div class="course-title">A42. Niemiecki od podstaw</div>
+  <div class="course-meta">Komunikacja codzienna.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="A43 Hiszpański od podstaw" data-level="A" data-tag="języki" href="#">
+  <div class="course-title">A43. Hiszpański od podstaw</div>
+  <div class="course-meta">Zwroty, wymowa, gramatyka.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="A44 Włoski od podstaw" data-level="A" data-tag="języki"
+   <a class="course-card" data-title="A44 Włoski od podstaw" data-level="A" data-tag="języki" href="#">
+  <div class="course-title">A44. Włoski od podstaw</div>
+  <div class="course-meta">Prosta komunikacja i podstawowe słownictwo.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="A45 Francuski od podstaw" data-level="A" data-tag="języki" href="#">
+  <div class="course-title">A45. Francuski od podstaw</div>
+  <div class="course-meta">Wymowa, podstawowe zwroty, gramatyka.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="A46 Polski od podstaw dla obcokrajowców" data-level="A" data-tag="polski" href="#">
+  <div class="course-title">A46. Polski od podstaw dla obcokrajowców</div>
+  <div class="course-meta">Alfabet, wymowa, podstawowe dialogi.</div>
+  <div class="course-tag">Polski</div>
+</a>
+
+<a class="course-card" data-title="A47 Polski dla Ukraińców PL-UA" data-level="A" data-tag="polski" href="#">
+  <div class="course-title">A47. Polski dla Ukraińców (PL-UA)</div>
+  <div class="course-meta">Podstawy komunikacji, słownictwo, dialogi PL-UA.</div>
+  <div class="course-tag">Polski / UA</div>
+</a>
+
+<a class="course-card" data-title="A48 Polski poprawny podstawy" data-level="A" data-tag="polski" href="#">
+  <div class="course-title">A48. Polski poprawny — podstawy</div>
+  <div class="course-meta">Najczęstsze błędy, zasady pisowni, stylistyka.</div>
+  <div class="course-tag">Polski</div>
+</a>
+<section id="tabB" class="courses-grid">
+  <!-- tutaj wkleisz kursy B z części 3/6 -->
+</section>
+<!-- ————————————————————————————————
+     POZIOM B — KURSY ŚREDNIO ZAAWANSOWANE
+———————————————————————————————— -->
+
+<a class="course-card" data-title="B41 Excel średnio zaawansowany" data-level="B" data-tag="excel" href="#">
+  <div class="course-title">B41. Excel — średnio zaawansowany</div>
+  <div class="course-meta">Tabele przestawne, funkcje logiczne, analiza danych.</div>
+  <div class="course-tag">Excel</div>
+</a>
+
+<a class="course-card" data-title="B42 Social Media w praktyce" data-level="B" data-tag="marketing" href="#">
+  <div class="course-title">B42. Social Media w praktyce</div>
+  <div class="course-meta">Strategie, treści, analityka, planowanie.</div>
+  <div class="course-tag">Marketing</div>
+</a>
+
+<a class="course-card" data-title="B43 Copywriting sprzedażowy" data-level="B" data-tag="copywriting" href="#">
+  <div class="course-title">B43. Copywriting sprzedażowy</div>
+  <div class="course-meta">Teksty, które sprzedają. Psychologia odbiorcy.</div>
+  <div class="course-tag">Copywriting</div>
+</a>
+
+<a class="course-card" data-title="B44 WordPress Elementor" data-level="B" data-tag="web" href="#">
+  <div class="course-title">B44. WordPress + Elementor</div>
+  <div class="course-meta">Tworzenie stron bez kodowania.</div>
+  <div class="course-tag">Web</div>
+</a>
+
+<a class="course-card" data-title="B45 Montaż wideo poziom 2" data-level="B" data-tag="wideo" href="#">
+  <div class="course-title">B45. Montaż wideo — poziom 2</div>
+  <div class="course-meta">Kolor grading, efekty, narracja wizualna.</div>
+  <div class="course-tag">Wideo</div>
+</a>
+
+<a class="course-card" data-title="B46 Żeglarz jachtowy teoria" data-level="B" data-tag="żeglarstwo" href="#">
+  <div class="course-title">B46. Żeglarz jachtowy — teoria</div>
+  <div class="course-meta">Przepisy, locja, meteorologia.</div>
+  <div class="course-tag">Żeglarstwo</div>
+</a>
+
+<a class="course-card" data-title="B47 Grafika w Canva poziom 2" data-level="B" data-tag="grafika" href="#">
+  <div class="course-title">B47. Canva — poziom 2</div>
+  <div class="course-meta">Branding, szablony, animacje.</div>
+  <div class="course-tag">Grafika</div>
+</a>
+
+<a class="course-card" data-title="B48 Python poziom średni" data-level="B" data-tag="python" href="#">
+  <div class="course-title">B48. Python — poziom średni</div>
+  <div class="course-meta">Funkcje, moduły, projekty.</div>
+  <div class="course-tag">Python</div>
+</a>
+
+<a class="course-card" data-title="B49 Angielski w pracy" data-level="B" data-tag="języki" href="#">
+  <div class="course-title">B49. Angielski w pracy</div>
+  <div class="course-meta">Maile, spotkania, prezentacje.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="B50 Zarządzanie czasem poziom 2" data-level="B" data-tag="produktywność" href="#">
+  <div class="course-title">B50. Zarządzanie czasem — poziom 2</div>
+  <div class="course-meta">Systemy produktywności, planowanie.</div>
+  <div class="course-tag">Produktywność</div>
+</a>
+
+<a class="course-card" data-title="B51 Google Ads podstawy" data-level="B" data-tag="ads" href="#">
+  <div class="course-title">B51. Google Ads — podstawy</div>
+  <div class="course-meta">Kampanie, budżety, targetowanie.</div>
+  <div class="course-tag">Ads</div>
+</a>
+
+<a class="course-card" data-title="B52 SEO podstawy" data-level="B" data-tag="seo" href="#">
+  <div class="course-title">B52. SEO — podstawy</div>
+  <div class="course-meta">Słowa kluczowe, optymalizacja treści.</div>
+  <div class="course-tag">SEO</div>
+</a>
+
+<a class="course-card" data-title="B53 UX UI podstawy" data-level="B" data-tag="ux" href="#">
+  <div class="course-title">B53. UX/UI — podstawy</div>
+  <div class="course-meta">Makiety, prototypy, zasady designu.</div>
+  <div class="course-tag">UX/UI</div>
+</a>
+
+<a class="course-card" data-title="B54 SQL podstawy" data-level="B" data-tag="sql" href="#">
+  <div class="course-title">B54. SQL — podstawy</div>
+  <div class="course-meta">Zapytania, filtry, sortowanie.</div>
+  <div class="course-tag">SQL</div>
+</a>
+
+<a class="course-card" data-title="B55 Excel w biznesie" data-level="B" data-tag="excel" href="#">
+  <div class="course-title">B55. Excel w biznesie</div>
+  <div class="course-meta">Raporty, analizy, automatyzacje.</div>
+  <div class="course-tag">Excel</div>
+</a>
+
+<a class="course-card" data-title="B56 Canva dla firm" data-level="B" data-tag="grafika" href="#">
+  <div class="course-title">B56. Canva dla firm</div>
+  <div class="course-meta">Materiały marketingowe, szablony.</div>
+  <div class="course-tag">Grafika</div>
+</a>
+
+<a class="course-card" data-title="B57 WordPress dla biznesu" data-level="B" data-tag="web" href="#">
+  <div class="course-title">B57. WordPress dla biznesu</div>
+  <div class="course-meta">Strony firmowe, optymalizacja.</div>
+  <div class="course-tag">Web</div>
+</a>
+
+<a class="course-card" data-title="B58 Montaż audio średnio zaawansowany" data-level="B" data-tag="audio" href="#">
+  <div class="course-title">B58. Montaż audio — poziom 2</div>
+  <div class="course-meta">Edycja, miks, efekty.</div>
+  <div class="course-tag">Audio</div>
+</a>
+
+<a class="course-card" data-title="B59 Fotografia średnio zaawansowana" data-level="B" data-tag="fotografia" href="#">
+  <div class="course-title">B59. Fotografia — poziom 2</div>
+  <div class="course-meta">Kompozycja, światło, obróbka.</div>
+  <div class="course-tag">Fotografia</div>
+</a>
+
+<a class="course-card" data-title="B60 Rysunek średnio zaawansowany" data-level="B" data-tag="rysunek" href="#">
+  <div class="course-title">B60. Rysunek — poziom 2</div>
+  <div class="course-meta">Perspektywa, anatomia, cieniowanie.</div>
+  <div class="course-tag">Rysunek</div>
+</a>
+
+<a class="course-card" data-title="B61 Elektronika średnio zaawansowana" data-level="B" data-tag="elektronika" href="#">
+  <div class="course-title">B61. Elektronika — poziom 2</div>
+  <div class="course-meta">Układy, pomiary, projekty.</div>
+  <div class="course-tag">Elektronika</div>
+</a>
+
+<a class="course-card" data-title="B62 Druk 3D średnio zaawansowany" data-level="B" data-tag="druk3d" href="#">
+  <div class="course-title">B62. Druk 3D — poziom 2</div>
+  <div class="course-meta">Projektowanie, slicery, materiały.</div>
+  <div class="course-tag">Druk 3D</div>
+</a>
+
+<a class="course-card" data-title="B63 Gotowanie średnio zaawansowane" data-level="B" data-tag="kuchnia" href="#">
+  <div class="course-title">B63. Gotowanie — poziom 2</div>
+  <div class="course-meta">Techniki kuchni świata.</div>
+  <div class="course-tag">Kuchnia</div>
+</a>
+
+<a class="course-card" data-title="B64 Ogrodnictwo średnio zaawansowane" data-level="B" data-tag="ogród" href="#">
+  <div class="course-title">B64. Ogrodnictwo — poziom 2</div>
+  <div class="course-meta">Projektowanie, pielęgnacja.</div>
+  <div class="course-tag">Ogród</div>
+</a>
+
+<a class="course-card" data-title="B65 Sprzedaż średnio zaawansowana" data-level="B" data-tag="sprzedaż" href="#">
+  <div class="course-title">B65. Sprzedaż — poziom 2</div>
+  <div class="course-meta">Techniki sprzedaży, psychologia klienta.</div>
+  <div class="course-tag">Sprzedaż</div>
+</a>
+
+<a class="course-card" data-title="B66 Wystąpienia publiczne średnio zaawansowane" data-level="B" data-tag="wystąpienia" href="#">
+  <div class="course-title">B66. Wystąpienia publiczne — poziom 2</div>
+  <div class="course-meta">Scena, kamera, narracja.</div>
+  <div class="course-tag">Wystąpienia</div>
+</a>
+
+<a class="course-card" data-title="B67 Asertywność średnio zaawansowana" data-level="B" data-tag="komunikacja" href="#">
+  <div class="course-title">B67. Asertywność — poziom 2</div>
+  <div class="course-meta">Techniki komunikacji, granice.</div>
+  <div class="course-tag">Komunikacja</div>
+</a>
+
+<a class="course-card" data-title="B68 HTML CSS średnio zaawansowane" data-level="B" data-tag="web" href="#">
+  <div class="course-title">B68. HTML/CSS — poziom 2</div>
+  <div class="course-meta">Responsywność, animacje.</div>
+  <div class="course-tag">Web</div>
+</a>
+
+<a class="course-card" data-title="B69 Angielski średnio zaawansowany" data-level="B" data-tag="języki" href="#">
+  <div class="course-title">B69. Angielski — poziom średni</div>
+  <div class="course-meta">Konwersacje, gramatyka, idiomy.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="B70 Python automatyzacje" data-level="B" data-tag="python" href="#">
+  <div class="course-title">B70. Python — automatyzacje</div>
+  <div class="course-meta">Skrypty, API, automaty.</div>
+  <div class="course-tag">Python</div>
+</a>
+
+<!-- ————————————————————————————————
+     KURSY JĘZYKOWE POZIOMU B (NOWE)
+———————————————————————————————— -->
+
+<a class="course-card" data-title="B71 Angielski w podróży" data-level="B" data-tag="języki" href="#">
+  <div class="course-title">B71. Angielski w podróży</div>
+  <div class="course-meta">Lotnisko, hotel, restauracja.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="B72 Niemiecki w pracy" data-level="B" data-tag="języki" href="#">
+  <div class="course-title">B72. Niemiecki w pracy</div>
+  <div class="course-meta">Komunikacja zawodowa, słownictwo branżowe.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="B73 Hiszpański w praktyce" data-level="B" data-tag="języki" href="#">
+  <div class="course-title">B73. Hiszpański w praktyce</div>
+  <div class="course-meta">Dialogi, konwersacje, codzienne sytuacje.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="B74 Włoski w praktyce" data-level="B" data-tag="języki" href="#">
+  <div class="course-title">B74. Włoski w praktyce</div>
+  <div class="course-meta">Komunikacja w realnych sytuacjach.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="B75 Francuski w pracy" data-level="B" data-tag="języki" href="#">
+  <div class="course-title">B75. Francuski w pracy</div>
+  <div class="course-meta">Słownictwo zawodowe i komunikacja.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="B76 Polski średnio zaawansowany" data-level="B" data-tag="polski" href="#">
+  <div class="course-title">B76. Polski — poziom średni</div>
+  <div class="course-meta">Gramatyka, odmiana, konwersacje.</div>
+  <div class="course-tag">Polski</div>
+</a>
+
+<a class="course-card" data-title="B77 Polski dla Ukraińców poziom B" data-level="B" data-tag="polski" href="#">
+  <div class="course-title">B77. Polski dla Ukraińców — poziom B</div>
+  <div class="course-meta">Dialogi, praca, urząd, codzienne sytuacje.</div>
+  <div class="course-tag">Polski / UA</div>
+</a>
+
+<a class="course-card" data-title="B78 Polski poprawny średnio zaawansowany" data-level="B" data-tag="polski" href="#">
+  <div class="course-title">B78. Polski poprawny — poziom średni</div>
+  <div class="course-meta">Styl, interpunkcja, poprawność językowa.</div>
+  <div class="course-tag">Polski</div>
+</a>
+<section id="tabC" class="courses-grid">
+  <!-- tutaj wkleisz kursy C z części 4/6 -->
+</section>
+<!-- ————————————————————————————————
+     POZIOM C — KURSY ZAAWANSOWANE
+———————————————————————————————— -->
+
+<a class="course-card" data-title="C71 Excel zaawansowany Power Query" data-level="C" data-tag="excel" href="#">
+  <div class="course-title">C71. Excel zaawansowany + Power Query</div>
+  <div class="course-meta">Automatyzacja, przekształcanie danych, raporty.</div>
+  <div class="course-tag">Excel</div>
+</a>
+
+<a class="course-card" data-title="C72 SEO zaawansowane" data-level="C" data-tag="seo" href="#">
+  <div class="course-title">C72. SEO — zaawansowane</div>
+  <div class="course-meta">Audyt, link building, analiza techniczna.</div>
+  <div class="course-tag">SEO</div>
+</a>
+
+<a class="course-card" data-title="C73 Google Analytics 4 zaawansowane" data-level="C" data-tag="analityka" href="#">
+  <div class="course-title">C73. Google Analytics 4 — zaawansowane</div>
+  <div class="course-meta">Zdarzenia, konwersje, raporty niestandardowe.</div>
+  <div class="course-tag">Analityka</div>
+</a>
+
+<a class="course-card" data-title="C74 Google Ads zaawansowane" data-level="C" data-tag="ads" href="#">
+  <div class="course-title">C74. Google Ads — zaawansowane</div>
+  <div class="course-meta">Optymalizacja, remarketing, strategie kampanii.</div>
+  <div class="course-tag">Ads</div>
+</a>
+
+<a class="course-card" data-title="C75 UX UI zaawansowane" data-level="C" data-tag="ux" href="#">
+  <div class="course-title">C75. UX/UI — zaawansowane</div>
+  <div class="course-meta">Badania, testy, prototypy high‑fidelity.</div>
+  <div class="course-tag">UX/UI</div>
+</a>
+
+<a class="course-card" data-title="C76 Sternik motorowodny teoria" data-level="C" data-tag="motorowodne" href="#">
+  <div class="course-title">C76. Sternik motorowodny — teoria</div>
+  <div class="course-meta">Przepisy, manewry, bezpieczeństwo.</div>
+  <div class="course-tag">Motorowodne</div>
+</a>
+
+<a class="course-card" data-title="C77 Cyberbezpieczeństwo w firmie" data-level="C" data-tag="bezpieczeństwo" href="#">
+  <div class="course-title">C77. Cyberbezpieczeństwo w firmie</div>
+  <div class="course-meta">Procedury, polityki, ochrona danych.</div>
+  <div class="course-tag">Bezpieczeństwo</div>
+</a>
+
+<a class="course-card" data-title="C78 SQL zaawansowane" data-level="C" data-tag="sql" href="#">
+  <div class="course-title">C78. SQL — zaawansowane</div>
+  <div class="course-meta">Złączenia, agregacje, optymalizacja zapytań.</div>
+  <div class="course-tag">SQL</div>
+</a>
+
+<a class="course-card" data-title="C79 Scrum Agile praktyka" data-level="C" data-tag="zarządzanie" href="#">
+  <div class="course-title">C79. Scrum i Agile — praktyka</div>
+  <div class="course-meta">Sprinty, backlog, role, skalowanie.</div>
+  <div class="course-tag">Zarządzanie</div>
+</a>
+
+<a class="course-card" data-title="C80 Automatyzacja marketingu" data-level="C" data-tag="marketing" href="#">
+  <div class="course-title">C80. Automatyzacja marketingu</div>
+  <div class="course-meta">Lejki, narzędzia, automatyczne kampanie.</div>
+  <div class="course-tag">Marketing</div>
+</a>
+
+<a class="course-card" data-title="C81 Python zaawansowane" data-level="C" data-tag="python" href="#">
+  <div class="course-title">C81. Python — zaawansowane</div>
+  <div class="course-meta">Automatyzacje, API, projekty.</div>
+  <div class="course-tag">Python</div>
+</a>
+
+<a class="course-card" data-title="C82 WordPress zaawansowane" data-level="C" data-tag="web" href="#">
+  <div class="course-title">C82. WordPress — zaawansowane</div>
+  <div class="course-meta">Wtyczki, optymalizacja, bezpieczeństwo.</div>
+  <div class="course-tag">Web</div>
+</a>
+
+<a class="course-card" data-title="C83 E-commerce zaawansowane" data-level="C" data-tag="ecommerce" href="#">
+  <div class="course-title">C83. E‑commerce — zaawansowane</div>
+  <div class="course-meta">Skalowanie, analityka, strategia.</div>
+  <div class="course-tag">E‑commerce</div>
+</a>
+
+<a class="course-card" data-title="C84 Montaż wideo zaawansowane" data-level="C" data-tag="wideo" href="#">
+  <div class="course-title">C84. Montaż wideo — zaawansowane</div>
+  <div class="course-meta">Efekty, korekcja barwna, storytelling.</div>
+  <div class="course-tag">Wideo</div>
+</a>
+
+<a class="course-card" data-title="C85 Fotografia zaawansowane" data-level="C" data-tag="fotografia" href="#">
+  <div class="course-title">C85. Fotografia — zaawansowane</div>
+  <div class="course-meta">Studio, światło, retusz.</div>
+  <div class="course-tag">Fotografia</div>
+</a>
+
+<a class="course-card" data-title="C86 Rysunek zaawansowane" data-level="C" data-tag="rysunek" href="#">
+  <div class="course-title">C86. Rysunek — zaawansowane</div>
+  <div class="course-meta">Realizm, portret, ilustracja.</div>
+  <div class="course-tag">Rysunek</div>
+</a>
+
+<a class="course-card" data-title="C87 Elektronika zaawansowane" data-level="C" data-tag="elektronika" href="#">
+  <div class="course-title">C87. Elektronika — zaawansowane</div>
+  <div class="course-meta">Projekty PCB, mikrokontrolery.</div>
+  <div class="course-tag">Elektronika</div>
+</a>
+
+<a class="course-card" data-title="C88 Druk 3D zaawansowane" data-level="C" data-tag="druk3d" href="#">
+  <div class="course-title">C88. Druk 3D — zaawansowane</div>
+  <div class="course-meta">Projektowanie techniczne, prototypy.</div>
+  <div class="course-tag">Druk 3D</div>
+</a>
+
+<a class="course-card" data-title="C89 Angielski zaawansowane" data-level="C" data-tag="języki" href="#">
+  <div class="course-title">C89. Angielski — zaawansowane</div>
+  <div class="course-meta">Business English, negocjacje.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="C90 Praca z AI zaawansowane" data-level="C" data-tag="ai" href="#">
+  <div class="course-title">C90. Praca z AI — zaawansowane</div>
+  <div class="course-meta">Tworzenie systemów, automatyzacja procesów.</div>
+  <div class="course-tag">AI</div>
+</a>
+
+<a class="course-card" data-title="C91 Podcasting zaawansowane" data-level="C" data-tag="audio" href="#">
+  <div class="course-title">C91. Podcasting — zaawansowane</div>
+  <div class="course-meta">Produkcja, marketing, monetyzacja.</div>
+  <div class="course-tag">Audio</div>
+</a>
+
+<a class="course-card" data-title="C92 Szachy zaawansowane" data-level="C" data-tag="szachy" href="#">
+  <div class="course-title">C92. Szachy — zaawansowane</div>
+  <div class="course-meta">Strategie, debiuty, analiza partii.</div>
+  <div class="course-tag">Szachy</div>
+</a>
+
+<a class="course-card" data-title="C93 Gotowanie zaawansowane" data-level="C" data-tag="kuchnia" href="#">
+  <div class="course-title">C93. Gotowanie — zaawansowane</div>
+  <div class="course-meta">Fine dining, techniki profesjonalne.</div>
+  <div class="course-tag">Kuchnia</div>
+</a>
+
+<a class="course-card" data-title="C94 Ogrodnictwo zaawansowane" data-level="C" data-tag="ogród" href="#">
+  <div class="course-title">C94. Ogrodnictwo — zaawansowane</div>
+  <div class="course-meta">Projektowanie ogrodów.</div>
+  <div class="course-tag">Ogród</div>
+</a>
+
+<a class="course-card" data-title="C95 Sprzedaż zaawansowane" data-level="C" data-tag="sprzedaż" href="#">
+  <div class="course-title">C95. Sprzedaż — zaawansowane</div>
+  <div class="course-meta">Psychologia sprzedaży, techniki negocjacji.</div>
+  <div class="course-tag">Sprzedaż</div>
+</a>
+
+<a class="course-card" data-title="C96 Wystąpienia publiczne zaawansowane" data-level="C" data-tag="wystąpienia" href="#">
+  <div class="course-title">C96. Wystąpienia publiczne — zaawansowane</div>
+  <div class="course-meta">Scena, kamera, autoprezentacja.</div>
+  <div class="course-tag">Wystąpienia</div>
+</a>
+
+<a class="course-card" data-title="C97 Asertywność zaawansowane" data-level="C" data-tag="komunikacja" href="#">
+  <div class="course-title">C97. Asertywność — zaawansowane</div>
+  <div class="course-meta">Zaawansowane techniki komunikacji.</div>
+  <div class="course-tag">Komunikacja</div>
+</a>
+
+<a class="course-card" data-title="C98 HTML CSS zaawansowane" data-level="C" data-tag="web" href="#">
+  <div class="course-title">C98. HTML/CSS — zaawansowane</div>
+  <div class="course-meta">Animacje, frameworki, optymalizacja.</div>
+  <div class="course-tag">Web</div>
+</a>
+
+<a class="course-card" data-title="C99 Python Data Science" data-level="C" data-tag="python" href="#">
+  <div class="course-title">C99. Python Data Science</div>
+  <div class="course-meta">Pandas, NumPy, analizy danych.</div>
+  <div class="course-tag">Python</div>
+</a>
+
+<a class="course-card" data-title="C100 Tworzenie kursów online PRO" data-level="C" data-tag="edu" href="#">
+  <div class="course-title">C100. Tworzenie kursów online — PRO</div>
+  <div class="course-meta">Scenariusze, nagrania, platformy.</div>
+  <div class="course-tag">E‑learning</div>
+</a>
+
+<!-- ————————————————————————————————
+     KURSY JĘZYKOWE POZIOMU C (NOWE)
+———————————————————————————————— -->
+
+<a class="course-card" data-title="C101 Angielski biznesowy" data-level="C" data-tag="języki" href="#">
+  <div class="course-title">C101. Angielski biznesowy</div>
+  <div class="course-meta">Negocjacje, prezentacje, korespondencja.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="C102 Angielski dla IT" data-level="C" data-tag="języki" href="#">
+  <div class="course-title">C102. Angielski dla IT</div>
+  <div class="course-meta">Słownictwo techniczne, komunikacja projektowa.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="C103 Niemiecki biznesowy" data-level="C" data-tag="języki" href="#">
+  <div class="course-title">C103. Niemiecki biznesowy</div>
+  <div class="course-meta">Spotkania, negocjacje, korespondencja.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="C104 Hiszpański zaawansowany" data-level="C" data-tag="języki" href="#">
+  <div class="course-title">C104. Hiszpański — zaawansowany</div>
+  <div class="course-meta">Konwersacje, idiomy, gramatyka.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="C105 Włoski zaawansowany" data-level="C" data-tag="języki" href="#">
+  <div class="course-title">C105. Włoski — zaawansowany</div>
+  <div class="course-meta">Konwersacje, kultura, idiomy.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="C106 Francuski zaawansowany" data-level="C" data-tag="języki" href="#">
+  <div class="course-title">C106. Francuski — zaawansowany</div>
+  <div class="course-meta">Styl, konwersacje, słownictwo specjalistyczne.</div>
+  <div class="course-tag">Języki</div>
+</a>
+
+<a class="course-card" data-title="C107 Polski akademicki" data-level="C" data-tag="polski" href="#">
+  <div class="course-title">C107. Polski akademicki</div>
+  <div class="course-meta">Eseje, prace naukowe, styl formalny.</div>
+  <div class="course-tag">Polski</div>
+</a>
+
+<a class="course-card" data-title="C108 Polski biznesowy" data-level="C" data-tag="polski" href="#">
+  <div class="course-title">C108. Polski biznesowy</div>
+  <div class="course-meta">Korespondencja, prezentacje, negocjacje.</div>
+  <div class="course-tag">Polski</div>
+</a>
+
+<a class="course-card" data-title="C109 Polski dla Ukraińców zaawansowany" data-level="C" data-tag="polski" href="#">
+  <div class="course-title">C109. Polski dla Ukraińców — zaawansowany</div>
+  <div class="course-meta">Praca, urząd, dokumenty, formalności.</div>
+  <div class="course-tag">Polski / UA</div>
+</a>
+<section id="tabLang" class="courses-grid">
+  <!-- tutaj wkleisz kursy językowe z części 5/6 -->
+</section>
+<!-- ————————————————————————————————
+     JĘZYKOWE — WSZYSTKIE POZIOMY A/B/C
+———————————————————————————————— -->
+
+<!-- ——— POZIOM A ——— -->
+
+<a class="course-card" data-title="A19 Angielski podstawy" data-level="A" data-tag="języki" href="#">
+  <div class="course-title">A19. Angielski — podstawy</div>
+  <div class="course-meta">Zwroty, słownictwo, gramatyka.</div>
+  <div class="course-tag">Angielski</div>
+</a>
+
+<a class="course-card" data-title="A20 Niemiecki podstawy" data-level="A" data-tag="języki" href="#">
+  <div class="course-title">A20. Niemiecki — podstawy</div>
+  <div class="course-meta">Codzienne sytuacje, podstawy gramatyki.</div>
+  <div class="course-tag">Niemiecki</div>
+</a>
+
+<a class="course-card" data-title="A41 Angielski od podstaw" data-level="A" data-tag="języki" href="#">
+  <div class="course-title">A41. Angielski od podstaw</div>
+  <div class="course-meta">Najważniejsze słówka i zwroty.</div>
+  <div class="course-tag">Angielski</div>
+</a>
+
+<a class="course-card" data-title="A42 Niemiecki od podstaw" data-level="A" data-tag="języki" href="#">
+  <div class="course-title">A42. Niemiecki od podstaw</div>
+  <div class="course-meta">Komunikacja codzienna.</div>
+  <div class="course-tag">Niemiecki</div>
+</a>
+
+<a class="course-card" data-title="A43 Hiszpański od podstaw" data-level="A" data-tag="języki" href="#">
+  <div class="course-title">A43. Hiszpański od podstaw</div>
+  <div class="course-meta">Zwroty, wymowa, gramatyka.</div>
+  <div class="course-tag">Hiszpański</div>
+</a>
+
+<a class="course-card" data-title="A44 Włoski od podstaw" data-level="A" data-tag="języki" href="#">
+  <div class="course-title">A44. Włoski od podstaw</div>
+  <div class="course-meta">Prosta komunikacja i podstawowe słownictwo.</div>
+  <div class="course-tag">Włoski</div>
+</a>
+
+<a class="course-card" data-title="A45 Francuski od podstaw" data-level="A" data-tag="języki" href="#">
+  <div class="course-title">A45. Francuski od podstaw</div>
+  <div class="course-meta">Wymowa, podstawowe zwroty, gramatyka.</div>
+  <div class="course-tag">Francuski</div>
+</a>
+
+<a class="course-card" data-title="A46 Polski od podstaw dla obcokrajowców" data-level="A" data-tag="polski" href="#">
+  <div class="course-title">A46. Polski od podstaw dla obcokrajowców</div>
+  <div class="course-meta">Alfabet, wymowa, podstawowe dialogi.</div>
+  <div class="course-tag">Polski</div>
+</a>
+
+<a class="course-card" data-title="A47 Polski dla Ukraińców PL-UA" data-level="A" data-tag="polski" href="#">
+  <div class="course-title">A47. Polski dla Ukraińców (PL-UA)</div>
+  <div class="course-meta">Podstawy komunikacji, słownictwo, dialogi PL-UA.</div>
+  <div class="course-tag">Polski / UA</div>
+</a>
+
+<a class="course-card" data-title="A48 Polski poprawny podstawy" data-level="A" data-tag="polski" href="#">
+  <div class="course-title">A48. Polski poprawny — podstawy</div>
+  <div class="course-meta">Najczęstsze błędy, zasady pisowni.</div>
+  <div class="course-tag">Polski</div>
+</a>
+
+<!-- ——— POZIOM B ——— -->
+
+<a class="course-card" data-title="B49 Angielski w pracy" data-level="B" data-tag="języki" href="#">
+  <div class="course-title">B49. Angielski w pracy</div>
+  <div class="course-meta">Maile, spotkania, prezentacje.</div>
+  <div class="course-tag">Angielski</div>
+</a>
+
+<a class="course-card" data-title="B69 Angielski średnio zaawansowany" data-level="B" data-tag="języki" href="#">
+  <div class="course-title">B69. Angielski — poziom średni</div>
+  <div class="course-meta">Konwersacje, gramatyka, idiomy.</div>
+  <div class="course-tag">Angielski</div>
+</a>
+
+<a class="course-card" data-title="B71 Angielski w podróży" data-level="B" data-tag="języki" href="#">
+  <div class="course-title">B71. Angielski w podróży</div>
+  <div class="course-meta">Lotnisko, hotel, restauracja.</div>
+  <div class="course-tag">Angielski</div>
+</a>
+
+<a class="course-card" data-title="B72 Niemiecki w pracy" data-level="B" data-tag="języki" href="#">
+  <div class="course-title">B72. Niemiecki w pracy</div>
+  <div class="course-meta">Komunikacja zawodowa, słownictwo branżowe.</div>
+  <div class="course-tag">Niemiecki</div>
+</a>
+
+<a class="course-card" data-title="B73 Hiszpański w praktyce" data-level="B" data-tag="języki" href="#">
+  <div class="course-title">B73. Hiszpański w praktyce</div>
+  <div class="course-meta">Dialogi, konwersacje, codzienne sytuacje.</div>
+  <div class="course-tag">Hiszpański</div>
+</a>
+
+<a class="course-card" data-title="B74 Włoski w praktyce" data-level="B" data-tag="języki" href="#">
+  <div class="course-title">B74. Włoski w praktyce</div>
+  <div class="course-meta">Komunikacja w realnych sytuacjach.</div>
+  <div class="course-tag">Włoski</div>
+</a>
+
+<a class="course-card" data-title="B75 Francuski w pracy" data-level="B" data-tag="języki" href="#">
+  <div class="course-title">B75. Francuski w pracy</div>
+  <div class="course-meta">Słownictwo zawodowe i komunikacja.</div>
+  <div class="course-tag">Francuski</div>
+</a>
+
+<a class="course-card" data-title="B76 Polski średnio zaawansowany" data-level="B" data-tag="polski" href="#">
+  <div class="course-title">B76. Polski — poziom średni</div>
+  <div class="course-meta">Gramatyka, odmiana, konwersacje.</div>
+  <div class="course-tag">Polski</div>
+</a>
+
+<a class="course-card" data-title="B77 Polski dla Ukraińców poziom B" data-level="B" data-tag="polski" href="#">
+  <div class="course-title">B77. Polski dla Ukraińców — poziom B</div>
+  <div class="course-meta">Dialogi, praca, urząd, codzienne sytuacje.</div>
+  <div class="course-tag">Polski / UA</div>
+</a>
+
+<a class="course-card" data-title="B78 Polski poprawny średnio zaawansowany" data-level="B" data-tag="polski" href="#">
+  <div class="course-title">B78. Polski poprawny — poziom średni</div>
+  <div class="course-meta">Styl, interpunkcja, poprawność językowa.</div>
+  <div class="course-tag">Polski</div>
+</a>
+
+<!-- ——— POZIOM C ——— -->
+
+<a class="course-card" data-title="C89 Angielski zaawansowany" data-level="C" data-tag="języki" href="#">
+  <div class="course-title">C89. Angielski — zaawansowane</div>
+  <div class="course-meta">Business English, negocjacje.</div>
+  <div class="course-tag">Angielski</div>
+</a>
+
+<a class="course-card" data-title="C101 Angielski biznesowy" data-level="C" data-tag="języki" href="#">
+  <div class="course-title">C101. Angielski biznesowy</div>
+  <div class="course-meta">Negocjacje, prezentacje, korespondencja.</div>
+  <div class="course-tag">Angielski</div>
+</a>
+
+<a class="course-card" data-title="C102 Angielski dla IT" data-level="C" data-tag="języki" href="#">
+  <div class="course-title">C102. Angielski dla IT</div>
+  <div class="course-meta">Słownictwo techniczne, komunikacja projektowa.</div>
+  <div class="course-tag">Angielski</div>
+</a>
+
+<a class="course-card" data-title="C103 Niemiecki biznesowy" data-level="C" data-tag="języki" href="#">
+  <div class="course-title">C103. Niemiecki biznesowy</div>
+  <div class="course-meta">Spotkania, negocjacje, korespondencja.</div>
+  <div class="course-tag">Niemiecki</div>
+</a>
+
+<a class="course-card" data-title="C104 Hiszpański zaawansowany" data-level="C" data-tag="języki" href="#">
+  <div class="course-title">C104. Hiszpański — zaawansowany</div>
+  <div class="course-meta">Konwersacje, idiomy, gramatyka.</div>
+  <div class="course-tag">Hiszpański</div>
+</a>
+
+<a class="course-card" data-title="C105 Włoski zaawansowany" data-level="C" data-tag="języki" href="#">
+  <div class="course-title">C105. Włoski — zaawansowany</div>
+  <div class="course-meta">Konwersacje, kultura, idiomy.</div>
+  <div class="course-tag">Włoski</div>
+</a>
+
+<a class="course-card" data-title="C106 Francuski zaawansowany" data-level="C" data-tag="języki" href="#">
+  <div class="course-title">C106. Francuski — zaawansowany</div>
+  <div class="course-meta">Styl, konwersacje, słownictwo specjalistyczne.</div>
+  <div class="course-tag">Francuski</div>
+</a>
+
+<a class="course-card" data-title="C107 Polski akademicki" data-level="C" data-tag="polski" href="#">
+  <div class="course-title">C107. Polski akademicki</div>
+  <div class="course-meta">Eseje, prace naukowe, styl formalny.</div>
+  <div class="course-tag">Polski</div>
+</a>
+
+<a class="course-card" data-title="C108 Polski biznesowy" data-level="C" data-tag="polski" href="#">
+  <div class="course-title">C108. Polski biznesowy</div>
+  <div class="course-meta">Korespondencja, prezentacje, negocjacje.</div>
+  <div class="course-tag">Polski</div>
+</a>
+
+<a class="course-card" data-title="C109 Polski dla Ukraińców zaawansowany" data-level="C" data-tag="polski" href="#">
+  <div class="course-title">C109. Polski dla Ukraińców — zaawansowany</div>
+  <div class="course-meta">Praca, urząd, dokumenty, formalności.</div>
+  <div class="course-tag">Polski / UA</div>
+</a>
+<section id="tabTeach" class="courses-grid">
+  <!-- tutaj wkleisz kursy nauczycielskie z części 6/6 -->
+</section>
+<!-- ————————————————————————————————
+     NAUCZYCIELE — KURSY T (TEACHER)
+———————————————————————————————— -->
+
+<a class="course-card" data-title="T1 Awans zawodowy nauczyciela" data-level="T" data-tag="nauczyciele" href="#">
+  <div class="course-title">T1. Awans zawodowy nauczyciela</div>
+  <div class="course-meta">Dokumentacja, wymagania, procedury.</div>
+  <div class="course-tag">Nauczyciele</div>
+</a>
+
+<a class="course-card" data-title="T2 Dokumentacja nauczyciela" data-level="T" data-tag="nauczyciele" href="#">
+  <div class="course-title">T2. Dokumentacja nauczyciela</div>
+  <div class="course-meta">Dzienniki, plany, raporty.</div>
+  <div class="course-tag">Nauczyciele</div>
+</a>
+
+<a class="course-card" data-title="T3 Metody aktywizujące" data-level="T" data-tag="nauczyciele" href="#">
+  <div class="course-title">T3. Metody aktywizujące</div>
+  <div class="course-meta">Praca w grupach, projekty, burza mózgów.</div>
+  <div class="course-tag">Nauczyciele</div>
+</a>
+
+<a class="course-card" data-title="T4 Praca z uczniem ze SPE" data-level="T" data-tag="nauczyciele" href="#">
+  <div class="course-title">T4. Praca z uczniem ze SPE</div>
+  <div class="course-meta">Dostosowania, narzędzia, wsparcie.</div>
+  <div class="course-tag">Nauczyciele</div>
+</a>
+
+<a class="course-card" data-title="T5 Ocenianie kształtujące" data-level="T" data-tag="nauczyciele" href="#">
+  <div class="course-title">T5. Ocenianie kształtujące</div>
+  <div class="course-meta">Informacja zwrotna, cele, kryteria.</div>
+  <div class="course-tag">Nauczyciele</div>
+</a>
+
+<a class="course-card" data-title="T6 Praca z trudnym uczniem" data-level="T" data-tag="nauczyciele" href="#">
+  <div class="course-title">T6. Praca z trudnym uczniem</div>
+  <div class="course-meta">Motywacja, komunikacja, strategie.</div>
+  <div class="course-tag">Nauczyciele</div>
+</a>
+
+<a class="course-card" data-title="T7 Nowoczesne technologie w edukacji" data-level="T" data-tag="nauczyciele" href="#">
+  <div class="course-title">T7. Nowoczesne technologie w edukacji</div>
+  <div class="course-meta">Aplikacje, AI, narzędzia online.</div>
+  <div class="course-tag">Nauczyciele</div>
+</a>
+
+<a class="course-card" data-title="T8 Tworzenie materiałów edukacyjnych" data-level="T" data-tag="nauczyciele" href="#">
+  <div class="course-title">T8. Tworzenie materiałów edukacyjnych</div>
+  <div class="course-meta">Karty pracy, prezentacje, multimedia.</div>
+  <div class="course-tag">Nauczyciele</div>
+</a>
+
+<a class="course-card" data-title="T9 Zarządzanie klasą" data-level="T" data-tag="nauczyciele" href="#">
+  <div class="course-title">T9. Zarządzanie klasą</div>
+  <div class="course-meta">Dyscyplina, organizacja, relacje.</div>
+  <div class="course-tag">Nauczyciele</div>
+</a>
+
+<a class="course-card" data-title="T10 Prawo oświatowe" data-level="T" data-tag="nauczyciele" href="#">
+  <div class="course-title">T10. Prawo oświatowe</div>
+  <div class="course-meta">Obowiązki, przepisy, odpowiedzialność.</div>
+  <div class="course-tag">Nauczyciele</div>
+</a>
 <script>
-(function() {
-  const tabs = document.querySelectorAll('.tab');
-  const sections = document.querySelectorAll('.courses-grid');
-  const searchInput = document.getElementById('searchInput');
-  const sortSelect = document.getElementById('sortSelect');
+// ————————————————————————————————
+// ZAKŁADKI
+// ————————————————————————————————
+const tabs = document.querySelectorAll(".tab");
+const sections = document.querySelectorAll(".courses-grid");
 
-  function getAllCards() {
-    return Array.from(document.querySelectorAll('.courses-grid .course-card'));
-  }
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    tabs.forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
 
-  function clearHighlights(el) {
-    el.innerHTML = el.innerHTML.replace(/<mark>(.*?)<\/mark>/g, '$1');
-  }
-
-  function highlightText(el, term) {
-    if (!term) return;
-    const text = el.textContent;
-    const regex = new RegExp(`(${term})`, 'ig');
-    el.innerHTML = text.replace(regex, '<mark>$1</mark>');
-  }
-
-  function applySearchAndSort() {
-    const term = searchInput.value.trim().toLowerCase();
-    const sort = sortSelect.value;
-    const cards = getAllCards();
-
-    cards.forEach(card => {
-      const titleEl = card.querySelector('.course-title');
-      const metaEl = card.querySelector('.course-meta');
-      const tagEl = card.querySelector('.course-tag');
-
-      [titleEl, metaEl, tagEl].forEach(clearHighlights);
-
-      const title = (card.dataset.title || '').toLowerCase();
-      const tag = (card.dataset.tag || '').toLowerCase();
-      const level = (card.dataset.level || '').toLowerCase();
-      const text = `${title} ${tag} ${level}`;
-
-      const matches = !term || text.includes(term);
-      card.style.display = matches ? '' : 'none';
-
-      if (matches && term) {
-        [titleEl, metaEl, tagEl].forEach(el => highlightText(el, term));
-      }
-    });
-
-    const groups = {};
-    sections.forEach(sec => {
-      groups[sec.id] = Array.from(sec.querySelectorAll('.course-card')).filter(c => c.style.display !== 'none');
-    });
-
-    function sortCards(list) {
-      return list.sort((a, b) => {
-        const ta = (a.dataset.title || '').toLowerCase();
-        const tb = (b.dataset.title || '').toLowerCase();
-        const taga = (a.dataset.tag || '').toLowerCase();
-        const tagb = (b.dataset.tag || '').toLowerCase();
-        const la = (a.dataset.level || '').toUpperCase();
-        const lb = (b.dataset.level || '').toUpperCase();
-
-        if (sort === 'az') return ta.localeCompare(tb);
-        if (sort === 'za') return tb.localeCompare(ta);
-        if (sort === 'temat') return taga.localeCompare(tagb);
-        if (sort === 'poziom') {
-          const order = { A: 1, B: 2, C: 3, T: 4 };
-          return (order[la] || 99) - (order[lb] || 99) || ta.localeCompare(tb);
-        }
-        return 0;
-      });
-    }
-
-    sections.forEach(sec => {
-      const visible = groups[sec.id];
-      const sorted = sortCards(visible);
-      sorted.forEach(card => sec.appendChild(card));
-    });
-  }
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      sections.forEach(s => s.classList.remove('active'));
-
-      tab.classList.add('active');
-      const targetId = tab.getAttribute('data-target');
-      const target = document.getElementById(targetId);
-      if (target) target.classList.add('active');
-
-      applySearchAndSort();
-    });
+    const target = tab.dataset.target;
+    sections.forEach(sec => sec.classList.remove("active"));
+    document.getElementById(target).classList.add("active");
   });
+});
 
-  searchInput.addEventListener('input', applySearchAndSort);
-  sortSelect.addEventListener('change', applySearchAndSort);
+// ————————————————————————————————
+// PRZYGOTOWANIE TYTUŁÓW DO HIGHLIGHT
+// ————————————————————————————————
+document.querySelectorAll(".course-card .course-title").forEach(titleDiv => {
+  titleDiv.dataset.originalTitle = titleDiv.textContent;
+});
 
-  applySearchAndSort();
-})();
+// ————————————————————————————————
+// WYSZUKIWARKA GLOBALNA
+// ————————————————————————————————
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase();
+
+  document.querySelectorAll(".course-card").forEach(card => {
+    const title = card.dataset.title.toLowerCase();
+    const tag = card.dataset.tag.toLowerCase();
+
+    const match = query === "" || title.includes(query) || tag.includes(query);
+
+    // pokaż / ukryj kartę
+    card.style.display = match ? "flex" : "none";
+
+    // przywróć oryginalny tytuł
+    const titleDiv = card.querySelector(".course-title");
+    const original = titleDiv.dataset.originalTitle;
+
+    if (query === "") {
+      // brak wyszukiwania — bez podświetlenia
+      titleDiv.innerHTML = original;
+    } else {
+      // podświetlenie dopasowanej frazy
+      const regex = new RegExp(`(${query})`, "gi");
+      titleDiv.innerHTML = original.replace(regex, "<mark>$1</mark>");
+    }
+  });
+});
+
+// ————————————————————————————————
+// SORTOWANIE
+// ————————————————————————————————
+const sortSelect = document.getElementById("sortSelect");
+
+sortSelect.addEventListener("change", () => {
+  const activeTab = document.querySelector(".courses-grid.active");
+  const cards = Array.from(activeTab.querySelectorAll(".course-card"));
+  const mode = sortSelect.value;
+
+  let sorted = cards;
+
+  if (mode === "az") {
+    sorted = cards.sort((a, b) =>
+      a.dataset.title.localeCompare(b.dataset.title, "pl")
+    );
+  }
+
+  if (mode === "za") {
+    sorted = cards.sort((a, b) =>
+      b.dataset.title.localeCompare(a.dataset.title, "pl")
+    );
+  }
+
+  if (mode === "poziom") {
+    const order = { A: 1, B: 2, C: 3, T: 4 };
+    sorted = cards.sort((a, b) =>
+      (order[a.dataset.level] || 99) - (order[b.dataset.level] || 99)
+    );
+  }
+
+  if (mode === "temat") {
+    sorted = cards.sort((a, b) =>
+      a.dataset.tag.localeCompare(b.dataset.tag, "pl")
+    );
+  }
+
+  sorted.forEach(card => activeTab.appendChild(card));
+});
 </script>
 
-</div>
+</div> <!-- .page -->
 </body>
 </html>
