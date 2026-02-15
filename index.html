@@ -1280,6 +1280,13 @@ tabs.forEach(tab => {
 });
 
 // ————————————————————————————————
+// PRZYGOTOWANIE TYTUŁÓW DO HIGHLIGHT
+// ————————————————————————————————
+document.querySelectorAll(".course-card .course-title").forEach(titleDiv => {
+  titleDiv.dataset.originalTitle = titleDiv.textContent;
+});
+
+// ————————————————————————————————
 // WYSZUKIWARKA GLOBALNA
 // ————————————————————————————————
 const searchInput = document.getElementById("searchInput");
@@ -1291,16 +1298,23 @@ searchInput.addEventListener("input", () => {
     const title = card.dataset.title.toLowerCase();
     const tag = card.dataset.tag.toLowerCase();
 
-    const match = title.includes(query) || tag.includes(query);
+    const match = query === "" || title.includes(query) || tag.includes(query);
 
+    // pokaż / ukryj kartę
     card.style.display = match ? "flex" : "none";
 
-    // highlight
+    // przywróć oryginalny tytuł
     const titleDiv = card.querySelector(".course-title");
-    titleDiv.innerHTML = titleDiv.textContent.replace(
-      new RegExp(query, "gi"),
-      match ? "<mark>$&</mark>" : titleDiv.textContent
-    );
+    const original = titleDiv.dataset.originalTitle;
+
+    if (query === "") {
+      // brak wyszukiwania — bez podświetlenia
+      titleDiv.innerHTML = original;
+    } else {
+      // podświetlenie dopasowanej frazy
+      const regex = new RegExp(`(${query})`, "gi");
+      titleDiv.innerHTML = original.replace(regex, "<mark>$1</mark>");
+    }
   });
 });
 
@@ -1318,32 +1332,33 @@ sortSelect.addEventListener("change", () => {
 
   if (mode === "az") {
     sorted = cards.sort((a, b) =>
-      a.dataset.title.localeCompare(b.dataset.title)
+      a.dataset.title.localeCompare(b.dataset.title, "pl")
     );
   }
 
   if (mode === "za") {
     sorted = cards.sort((a, b) =>
-      b.dataset.title.localeCompare(a.dataset.title)
+      b.dataset.title.localeCompare(a.dataset.title, "pl")
     );
   }
 
   if (mode === "poziom") {
     const order = { A: 1, B: 2, C: 3, T: 4 };
     sorted = cards.sort((a, b) =>
-      order[a.dataset.level] - order[b.dataset.level]
+      (order[a.dataset.level] || 99) - (order[b.dataset.level] || 99)
     );
   }
 
   if (mode === "temat") {
     sorted = cards.sort((a, b) =>
-      a.dataset.tag.localeCompare(b.dataset.tag)
+      a.dataset.tag.localeCompare(b.dataset.tag, "pl")
     );
   }
 
   sorted.forEach(card => activeTab.appendChild(card));
 });
 </script>
+
 </div> <!-- .page -->
 </body>
 </html>
